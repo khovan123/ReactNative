@@ -7,3 +7,4 @@ cd AwesomeProject
 npx expo start
 
 hiii
+demo git
