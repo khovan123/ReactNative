@@ -1,34 +1,53 @@
-import { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import React, { useState } from "react";
+import {
+  Button,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  ScrollView,
+  FlatList,
+} from "react-native";
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState("");
   const [courseGoals, setCourseGoals] = useState([]);
   function goalInputHandler(enteredText) {
-    setEnteredGoalText(enteredGoalText);
+    setEnteredGoalText(enteredText);
   }
 
   function addGoalHandler() {
-    setCourseGoals((currentCourseGoals) => {
-      [...currentCourseGoals, enteredGoalText];
-    });
-    console.log(courseGoals);
+    setCourseGoals((currentCourseGoals) => [
+      ...currentCourseGoals,
+      { key: Math.random().toString(), text: enteredGoalText },
+    ]);
+    setEnteredGoalText("");
   }
   return (
     <View style={styles.appContainer}>
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.textInput}
-          placeholder="Your course goal!!"
+          placeholder={"Your course goal!"}
+          value={enteredGoalText == "" ? "" : enteredGoalText}
           onChangeText={goalInputHandler}
         />
         <Button title="Add Goal" onPress={addGoalHandler} />
       </View>
       <View style={styles.goalsContainer}>
-        {courseGoals.map((goal) => (
-          <Text style={styles.goalItem} key={goal}>
-            {goal}
-          </Text>
-        ))}
+        <FlatList
+          data={courseGoals}
+          renderItem={(itemData) => {
+            return (
+              <View style={styles.goalItem}>
+                <Text style={styles.goalText}>{itemData.item.text}</Text>
+              </View>
+            );
+          }}
+          keyExtractor={(item, index) => {
+            return item.key;
+          }}
+          alwaysBounceVertical={false}
+        />
       </View>
     </View>
   );
@@ -65,6 +84,8 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     backgroundColor: "#5e0acc",
     padding: 8,
+  },
+  goalText: {
     color: "white",
   },
 });
