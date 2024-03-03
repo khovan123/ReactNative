@@ -1,0 +1,10 @@
+###font-weight
+bold
+600
+##font-size
+24
+##color
+#3c0d0d
+#e03131
+##gray
+#212529
