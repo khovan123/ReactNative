@@ -5,6 +5,6 @@ bold
 24
 ##color
 #3c0d0d
-#e03131
+#e8590c
 ##gray
 #212529

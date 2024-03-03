@@ -14,8 +14,8 @@ import SubTitle from "../components/SubTitle";
 import List from "../components/List";
 import IconButton from "../components/IconButton";
 function MealDetailScreen({ route, navigation }) {
-  const id = route.params.id;
-  const selectedMeal = MEALS.find((meal) => meal.id === id);
+  const MealIds = route.params.MealIds;
+  const selectedMeal = MEALS.find((meal) => meal.id === MealIds);
   function headerButtonPressHandler() {
     console.log("P");
   }

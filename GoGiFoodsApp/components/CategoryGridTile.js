@@ -1,6 +1,13 @@
-import { Pressable, StyleSheet, View, Text, Platform } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  View,
+  Text,
+  Platform,
+  ImageBackground,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
-function CategoryGridTile({ title, color, onPress }) {
+function CategoryGridTile({ title, color, onPress, backgroud }) {
   return (
     <View style={[styles.gridItem]}>
       <Pressable
@@ -12,7 +19,15 @@ function CategoryGridTile({ title, color, onPress }) {
         android_ripple={{ color: "#ccc" }}
       >
         <View style={[styles.innerContainer, { backgroundColor: color }]}>
-          <Text style={styles.title}>{title}</Text>
+          <ImageBackground
+            style={styles.backgroud}
+            source={{ uri: backgroud }}
+            resizeMode="cover"
+          >
+            <View style={styles.innerBackground}>
+              <Text style={styles.title}>{title}</Text>
+            </View>
+          </ImageBackground>
         </View>
       </Pressable>
     </View>
@@ -43,14 +58,24 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     flex: 1,
-    padding: 16,
+    padding: 4,
     borderRadius: 8,
     justifyContent: "center",
     alignItems: "center",
   },
   title: {
-    fontSize: 16,
+    fontSize: 24,
     fontWeight: "bold",
-    color: "#212529",
+    color: "#fff",
+  },
+  innerBackground: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  backgroud: {
+    width: "100%",
+    height: "100%",
+    opacity: 0.8,
   },
 });

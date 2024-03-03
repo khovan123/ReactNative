@@ -27,7 +27,7 @@ function MealsOverviewScreen({ route, navigation }) {
     };
     function pressHandler() {
       navigation.navigate("MealDetail", {
-        id: itemData.item.id,
+        MealIds: itemData.item.id,
       });
     }
     return (
