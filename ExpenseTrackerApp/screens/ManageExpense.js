@@ -1,11 +1,19 @@
 import { useLayoutEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TextInput } from "react-native";
 import { GlobalStyles } from "../constants/styles";
 import IconButton from "../UI/IconButton";
 import Button from "../UI/Button";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  deleteExpense,
+  updateExpense,
+  addExpense,
+} from "../store/redux/expenses";
 function ManageExpense({ route, navigation }) {
   const editedExpenseID = route.params?.expenseId;
   const isEditting = !!editedExpenseID;
+  const dispatch = useDispatch();
+  const expenses = useSelector((state) => state.expensesTracker.expenses);
   useLayoutEffect(() => {
     navigation.setOptions({
       title: isEditting ? "Editting Expense" : "Add Expense",
@@ -13,6 +21,7 @@ function ManageExpense({ route, navigation }) {
   }, [navigation, isEditting]);
 
   function deleteExpenseHandler() {
+    dispatch(deleteExpense({ id: editedExpenseID }));
     navigation.goBack();
   }
 
@@ -21,6 +30,24 @@ function ManageExpense({ route, navigation }) {
   }
 
   function confirmHandler() {
+    if (isEditting) {
+      dispatch(
+        updateExpense({
+          id: editedExpenseID,
+          description: "Test",
+          amount: 33.3,
+          date: "19-8-2023",
+        })
+      );
+    } else {
+      dispatch(
+        addExpense({
+          description: "Test",
+          amount: 33.3,
+          date: "19-8-2023",
+        })
+      );
+    }
     navigation.goBack();
   }
   return (

@@ -10,7 +10,7 @@ import { GlobalStyles } from "./constants/styles";
 import { Ionicons } from "@expo/vector-icons";
 import IconButton from "./UI/IconButton";
 import { Provider } from "react-redux";
-import store from "./store/redux/store";
+import { store } from "./store/redux/store";
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
