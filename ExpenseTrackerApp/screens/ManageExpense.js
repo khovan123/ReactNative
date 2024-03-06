@@ -9,6 +9,7 @@ import {
   updateExpense,
   addExpense,
 } from "../store/redux/expenses";
+import ExpenseForm from "../components/ManageExpense/ExpenseForm";
 function ManageExpense({ route, navigation }) {
   const editedExpenseID = route.params?.expenseId;
   const isEditting = !!editedExpenseID;
@@ -52,6 +53,7 @@ function ManageExpense({ route, navigation }) {
   }
   return (
     <View style={styles.container}>
+      <ExpenseForm />
       <View style={styles.buttons}>
         <Button mode={"flat"} onPress={cancelHandler} style={styles.button}>
           Cancel
